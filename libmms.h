@@ -30,4 +30,6 @@ void	*mms_alloc(size_t size, size_t typesize);
 
 void	print_list();
 
+void	*mms_free(void *ptr);
+
 #endif

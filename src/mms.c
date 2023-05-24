@@ -13,7 +13,7 @@
 #include "../libmms.h"
 
 // Note: add protection later.
-t_pointer	*get_data(void)
+t_pointer	*get_data_mms(void)
 {
 	static t_pointer	*data = NULL;
 
@@ -31,7 +31,7 @@ void	mms_kill(char *message, bool quit, int code)
 	t_pointer	*current;
 	t_pointer	*buffer;
 
-	current = get_data();
+	current = get_data_mms();
 	while (current)
 	{
 		if (current->ptr)
@@ -50,32 +50,49 @@ void	*mms_alloc(size_t size, size_t typesize)
 {
 	t_pointer	*current;
 
-	if (!get_data()->ptr)
+	if (!get_data_mms()->ptr)
 	{
-		get_data()->ptr = malloc(size * typesize);
-		if (!get_data()->ptr)
+		get_data_mms()->ptr = malloc(size * typesize);
+		if (!get_data_mms()->ptr)
 			mms_kill("Failled to allocate ! \n", true, EXIT_FAILURE);
-		get_data()->next = NULL;
-		return (get_data()->ptr);
+		get_data_mms()->next = NULL;
+		return (get_data_mms()->ptr);
 	}
-	current = get_data();	
+	current = get_data_mms();	
 	while (current->next)
 		current = current->next;
 	current->next = malloc(1 * sizeof(t_pointer));
 	if (!current->next)
 		mms_kill("Failled to allocate ! \n", true, EXIT_FAILURE);
 	current->next->ptr = malloc(size * typesize);
-	if (current->next->ptr)
+	if (!current->next->ptr)
 		mms_kill("Failled to allocate ! \n", true, EXIT_FAILURE);
 	current->next->next = NULL;
 	return (current->next->ptr);
+}
+
+void	*mms_free(void *ptr)
+{
+	t_pointer	*current;
+
+	current = get_data_mms();
+	while (current)
+	{
+		if (current->ptr == ptr)
+		{
+			free(current->ptr);
+			return (NULL);
+		}
+		current = current->next;
+	}
+	return (NULL);
 }
 
 void	print_list()
 {
 	t_pointer	*current;
 
-	current = get_data();
+	current = get_data_mms();
 	if (!current)
 		return ;
 	while (current)
