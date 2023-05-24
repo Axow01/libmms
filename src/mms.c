@@ -6,7 +6,7 @@
 /*   By: mmarcott <mmarcott@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 01:51:32 by mmarcott          #+#    #+#             */
-/*   Updated: 2023/05/24 02:49:29 by mmarcott         ###   ########.fr       */
+/*   Updated: 2023/05/24 15:16:58 by mmarcott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	*mms_alloc(size_t size, size_t typesize)
 		get_data_mms()->next = NULL;
 		return (get_data_mms()->ptr);
 	}
-	current = get_data_mms();	
+	current = get_data_mms();
 	while (current->next)
 		current = current->next;
 	current->next = malloc(1 * sizeof(t_pointer));
@@ -81,6 +81,7 @@ void	*mms_free(void *ptr)
 		if (current->ptr == ptr)
 		{
 			free(current->ptr);
+			current->ptr = NULL;
 			return (NULL);
 		}
 		current = current->next;
