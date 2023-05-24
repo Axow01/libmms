@@ -6,7 +6,7 @@
 /*   By: mmarcott <mmarcott@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 01:51:32 by mmarcott          #+#    #+#             */
-/*   Updated: 2023/05/24 15:16:58 by mmarcott         ###   ########.fr       */
+/*   Updated: 2023/05/24 15:22:23 by mmarcott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,8 @@ void	mms_kill(char *message, bool quit, int code)
 		free(current);
 		current = buffer;
 	}
-	printf("%s", message);
+	if (message)
+		printf("%s", message);
 	if (quit)
 		exit(code);
 }
