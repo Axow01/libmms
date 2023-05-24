@@ -26,7 +26,7 @@ typedef	struct s_pointer
 // Delete all the used memory from the manager.
 void	mms_kill(char *message, bool quit, int code);
 
-void	*mms_alloc(int size, int typesize);
+void	*mms_alloc(size_t size, size_t typesize);
 
 void	print_list();
 

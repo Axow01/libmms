@@ -14,12 +14,11 @@
 
 int	main(void)
 {
-	char	*cock;
+	char	*str;
 
-	cock = mms_alloc(2, sizeof(char));
-	cock[1] = 0;
-	cock[0] = 'g';
-	printf("%s\n", cock);
-	mms_kill("Mange moi le dart\n", true, EXIT_SUCCESS);
-	print_list();
+	str = mms_alloc(20, sizeof(char));
+	str[0] = 'd';
+	str[1] = 0;
+	printf("%s\n", str);
+	mms_kill("Qutting the program !\n", true, EXIT_SUCCESS);
 }

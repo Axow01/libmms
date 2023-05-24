@@ -46,7 +46,7 @@ void	mms_kill(char *message, bool quit, int code)
 		exit(code);
 }
 
-void	*mms_alloc(int size, int typesize)
+void	*mms_alloc(size_t size, size_t typesize)
 {
 	t_pointer	*current;
 
@@ -76,6 +76,8 @@ void	print_list()
 	t_pointer	*current;
 
 	current = get_data();
+	if (!current)
+		return ;
 	while (current)
 	{
 		printf("%p\n", current->ptr);
