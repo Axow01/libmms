@@ -6,7 +6,7 @@
 /*   By: mmarcott <mmarcott@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 01:51:32 by mmarcott          #+#    #+#             */
-/*   Updated: 2023/05/24 15:22:23 by mmarcott         ###   ########.fr       */
+/*   Updated: 2023/05/24 15:41:10 by mmarcott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@ void	*mms_alloc(size_t size, size_t typesize)
 {
 	t_pointer	*current;
 
+	if (size <= 0)
+		size = 1;
 	if (!get_data_mms()->ptr)
 	{
 		get_data_mms()->ptr = malloc(size * typesize);
