@@ -6,7 +6,7 @@
 /*   By: mmarcott <mmarcott@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 01:51:32 by mmarcott          #+#    #+#             */
-/*   Updated: 2023/05/24 19:52:27 by mmarcott         ###   ########.fr       */
+/*   Updated: 2023/05/27 18:41:09 by mmarcott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ t_pointer	*get_data_mms(void)
 		data = calloc(1, sizeof(t_pointer));
 		if (!data)
 			mms_kill("Failled to allocate ! \n", true, EXIT_FAILURE);
+		data->alloc_func = calloc;
 	}
 	return (data);
 }

@@ -6,7 +6,7 @@
 /*   By: mmarcott <mmarcott@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 01:48:36 by mmarcott          #+#    #+#             */
-/*   Updated: 2023/05/24 02:52:53 by mmarcott         ###   ########.fr       */
+/*   Updated: 2023/05/27 18:40:07 by mmarcott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,15 +22,18 @@ typedef struct s_pointer
 {
 	void				*ptr;
 	struct s_pointer	*next;
+	void			*alloc_func;
 }				t_pointer;
 
 // Delete all the used memory from the manager.
-void	mms_kill(char *message, bool quit, int code);
+void		mms_kill(char *message, bool quit, int code);
 
-void	*mms_alloc(size_t size, size_t typesize);
+void		*mms_alloc(size_t size, size_t typesize);
 
-void	print_list(void);
+void		print_list(void);
 
-void	*mms_free(void *ptr);
+void		*mms_free(void *ptr);
+
+t_pointer	*get_data_mms(void);
 
 #endif
