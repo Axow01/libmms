@@ -101,7 +101,10 @@ void	print_list(void)
 		return ;
 	while (current)
 	{
-		printf("%p\n", current->ptr);
+		if (current->ptr)
+			printf("%p\n", current->ptr);
+		else
+			write(1, "NULL\n", 5);
 		current = current->next;
 	}
 }
