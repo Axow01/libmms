@@ -16,6 +16,7 @@ all: $(NAME)
 
 $(NAME): $(OBJS)
 	@ar -rcs $(NAME) $(OBJS)
+	@echo "Libmms build complete..."
 
 bin/%.o: src/%.c
 	@mkdir -p bin/
