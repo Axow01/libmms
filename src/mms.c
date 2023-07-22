@@ -6,20 +6,22 @@
 /*   By: mmarcott <mmarcott@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 01:51:32 by mmarcott          #+#    #+#             */
-/*   Updated: 2023/07/15 17:56:07 by mmarcott         ###   ########.fr       */
+/*   Updated: 2023/07/21 21:35:09 by mmarcott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libmms.h"
 
-// Note: add protection later.
 t_pointer	*get_data_mms(void)
 {
 	static t_pointer	*data = NULL;
 
 	if (!data)
 	{
-		data = calloc(1, sizeof(t_pointer));
+		data = malloc(1 * sizeof(t_pointer));
+		data->f = NULL;
+		data->next = NULL;
+		data->ptr = NULL;
 		if (!data)
 			mms_kill("Failled to allocate ! \n", true, EXIT_FAILURE);
 		data->f = calloc;
