@@ -6,7 +6,7 @@
 /*   By: mmarcott <mmarcott@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 01:51:32 by mmarcott          #+#    #+#             */
-/*   Updated: 2023/07/21 21:35:09 by mmarcott         ###   ########.fr       */
+/*   Updated: 2023/08/11 11:48:08 by mmarcott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,12 @@ t_pointer	*get_data_mms(void)
 	if (!data)
 	{
 		data = malloc(1 * sizeof(t_pointer));
+		if (!data)
+			mms_kill("Failled to allocate ! \n", true, EXIT_FAILURE);
 		data->f = NULL;
 		data->next = NULL;
 		data->ptr = NULL;
-		if (!data)
-			mms_kill("Failled to allocate ! \n", true, EXIT_FAILURE);
-		data->f = calloc;
+		data->last_allocated = data;
 	}
 	return (data);
 }
@@ -63,19 +63,19 @@ void	*mms_alloc(size_t size, size_t typesize)
 		if (!get_data_mms()->ptr)
 			mms_kill("Failled to allocate ! \n", true, EXIT_FAILURE);
 		get_data_mms()->next = NULL;
+		get_data_mms()->last_allocated = current;
 		return (get_data_mms()->ptr);
 	}
-	current = get_data_mms();
-	while (current->next)
-		current = current->next;
+	current = get_data_mms()->last_allocated;
 	current->next = get_data_mms()->f(1, sizeof(t_pointer));
 	if (!current->next)
-		mms_kill("Failled to allocate ! \n", true, EXIT_FAILURE);
-	current->next->ptr = get_data_mms()->f(size, typesize);
-	if (!current->next->ptr)
-		mms_kill("Failled to allocate ! \n", true, EXIT_FAILURE);
-	current->next->next = NULL;
-	return (current->next->ptr);
+		mms_kill("Allocation Error\n", true, 10);
+	current = current->next;
+	current->ptr = get_data_mms()->f(size, typesize);
+	if (!current->ptr)
+		mms_kill("Allocation Error\n", true, 10);
+	get_data_mms()->last_allocated = current;
+	return (current->ptr);
 }
 
 void	*mms_free(void *ptr)
