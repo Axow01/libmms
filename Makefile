@@ -8,7 +8,7 @@ OBJS = $(patsubst src/%.c, bin/%.o, $(SRC))
 
 CC = gcc
 
-CFLAGS = -Wall -Wextra -Werror -g
+CFLAGS = -Wall -Wextra -Werror #-g -fsanitize=address
 
 #---   RULES   ---#
 
@@ -23,10 +23,10 @@ bin/%.o: src/%.c
 	@$(CC) $(CFLAGS) -c -o $@ $<
 
 clean:
-	@rm -rf bin/
+	@rm -rfd bin/
 
 fclean: clean
-	@rm $(NAME)
+	@rm -rfd $(NAME)
 
 bonus: all
 
