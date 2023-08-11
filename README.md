@@ -14,7 +14,7 @@ gcc -Lpath/to/libmms -lmms program.c
 ## Usage
 
 ```c
-#include "path/ta/libmms/libmms.h"
+#include "path/to/libmms/libmms.h"
 #include <stdlib.h>
 
 int main(void)
