@@ -6,7 +6,7 @@
 /*   By: mmarcott <mmarcott@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 01:48:36 by mmarcott          #+#    #+#             */
-/*   Updated: 2023/08/11 12:20:06 by mmarcott         ###   ########.fr       */
+/*   Updated: 2023/08/17 14:39:08 by mmarcott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ typedef struct s_pointer
 	struct s_pointer	*next;
 	void				*(*f)(size_t, size_t);
 	void				*last_allocated;
+	bool				initiated;
 }				t_pointer;
 
 /// @brief This function deletes all the pointers assigned with the lib.

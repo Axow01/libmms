@@ -1,5 +1,3 @@
-#--- DEFAULT VALUES ---#
-
 NAME = libmms.a
 
 SRC = src/mms.c src/utils.c
@@ -8,7 +6,7 @@ OBJS = $(patsubst src/%.c, bin/%.o, $(SRC))
 
 CC = gcc
 
-CFLAGS = -Wall -Wextra -Werror #-g -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror -g #-fsanitize=address
 
 #---   RULES   ---#
 

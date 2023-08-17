@@ -6,7 +6,7 @@
 /*   By: mmarcott <mmarcott@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 01:51:32 by mmarcott          #+#    #+#             */
-/*   Updated: 2023/08/11 16:20:43 by mmarcott         ###   ########.fr       */
+/*   Updated: 2023/08/17 14:40:18 by mmarcott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,13 @@ t_pointer	*get_data_mms(void)
 
 	if (!data)
 	{
-		data = malloc(1 * sizeof(t_pointer));
+		data = calloc(1, sizeof(t_pointer));
 		if (!data)
 			mms_kill("Failled to allocate ! \n", true, EXIT_FAILURE);
 		data->f = NULL;
 		data->next = NULL;
 		data->ptr = NULL;
+		data->initiated = false;
 		data->last_allocated = data;
 	}
 	return (data);
@@ -56,8 +57,9 @@ void	*mms_alloc(size_t size, size_t typesize)
 
 	if (size <= 0)
 		size = 1;
-	if (!get_data_mms()->ptr)
+	if (!get_data_mms()->ptr && !get_data_mms()->initiated)
 	{
+		get_data_mms()->initiated = true;
 		current = get_data_mms();
 		current->ptr = (get_data_mms()->f(size, typesize));
 		if (!get_data_mms()->ptr)
