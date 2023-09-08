@@ -4,6 +4,8 @@
 
 Libmms is a library in C (memory management system). It manages the memory of a program by allocating and freeing memory blocks.
 
+Changing the readme file for no reasons.
+
 ## Installation
 
 ```bash
