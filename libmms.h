@@ -6,7 +6,7 @@
 /*   By: mmarcott <mmarcott@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 01:48:36 by mmarcott          #+#    #+#             */
-/*   Updated: 2023/08/17 14:39:08 by mmarcott         ###   ########.fr       */
+/*   Updated: 2023/10/13 09:49:59 by mmarcott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,5 +55,13 @@ t_pointer	*get_data_mms(void);
 /// @brief Used to change the default function for allocation.
 /// @param f The function ex: calloc. Default is calloc.
 void		mms_set_alloc_fn(void *(*f)(size_t, size_t));
+
+/// @brief This function allows the user to add a pointer not created by the lib
+///			to the system. exemple: read(), readline(), etc. All function that
+///			return ptr that needs to free eventually.
+/// @param ptr Any pointer to store. Cannot be a pointer already stored
+///				by the lib.
+/// @return True if the ptr was added to the lib, false if not.
+bool		mms_add_ptr(void *ptr);
 
 #endif
