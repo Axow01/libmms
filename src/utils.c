@@ -6,7 +6,7 @@
 /*   By: mmarcott <mmarcott@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 17:03:18 by mmarcott          #+#    #+#             */
-/*   Updated: 2023/10/13 09:50:23 by mmarcott         ###   ########.fr       */
+/*   Updated: 2023/10/26 15:03:55 by mmarcott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,5 +57,22 @@ bool	mms_add_ptr(void *ptr)
 	ptr_list->f = get_data_mms()->f;
 	ptr_list->ptr = ptr;
 	get_data_mms()->last_allocated = ptr_list;
+	return (true);
+}
+
+bool	mms_untrack_ptr(void *ptr)
+{
+	t_pointer	*ptr_list;
+
+	ptr_list = get_data_mms();
+	while (ptr_list)
+	{
+		if (ptr_list->ptr == ptr)
+			break ;
+		ptr_list = ptr_list->next;
+	}
+	if (!ptr_list)
+		return (false);
+	ptr_list->ptr = NULL;
 	return (true);
 }

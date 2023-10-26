@@ -6,7 +6,7 @@
 /*   By: mmarcott <mmarcott@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 01:48:36 by mmarcott          #+#    #+#             */
-/*   Updated: 2023/10/13 09:49:59 by mmarcott         ###   ########.fr       */
+/*   Updated: 2023/10/26 15:05:08 by mmarcott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,5 +63,10 @@ void		mms_set_alloc_fn(void *(*f)(size_t, size_t));
 ///				by the lib.
 /// @return True if the ptr was added to the lib, false if not.
 bool		mms_add_ptr(void *ptr);
+
+/// @brief This removes a pointer from the lib tracking system.
+/// @param ptr the ptr to remove.
+/// @return True if succeeded, false if not.
+bool		mms_untrack_ptr(void *ptr);
 
 #endif
