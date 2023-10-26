@@ -6,7 +6,7 @@
 /*   By: mmarcott <mmarcott@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 17:03:18 by mmarcott          #+#    #+#             */
-/*   Updated: 2023/10/26 15:03:55 by mmarcott         ###   ########.fr       */
+/*   Updated: 2023/10/26 15:20:04 by mmarcott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,8 @@ bool	mms_untrack_ptr(void *ptr)
 {
 	t_pointer	*ptr_list;
 
+	if (!ptr)
+		return (false);
 	ptr_list = get_data_mms();
 	while (ptr_list)
 	{
