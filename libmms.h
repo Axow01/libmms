@@ -6,7 +6,7 @@
 /*   By: mmarcott <mmarcott@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 01:48:36 by mmarcott          #+#    #+#             */
-/*   Updated: 2023/10/26 15:05:08 by mmarcott         ###   ########.fr       */
+/*   Updated: 2023/11/12 17:15:20 by mmarcott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,14 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <stdbool.h>
+# include <fcntl.h>
+# include <stdarg.h>
+
+typedef struct s_mms_fd
+{
+	int				fd;
+	struct s_mms_fd	*next;
+}				t_mms_fd;
 
 typedef struct s_pointer
 {
@@ -24,6 +32,7 @@ typedef struct s_pointer
 	struct s_pointer	*next;
 	void				*(*f)(size_t, size_t);
 	void				*last_allocated;
+	t_mms_fd			*mms_fd;
 	bool				initiated;
 }				t_pointer;
 
@@ -68,5 +77,18 @@ bool		mms_add_ptr(void *ptr);
 /// @param ptr the ptr to remove.
 /// @return True if succeeded, false if not.
 bool		mms_untrack_ptr(void *ptr);
+
+/// @brief Removes all fd and frees the struct.
+void		mms_clean_fd(void);
+
+/// @brief Close and fd, opened with the mms lib.
+/// @param fd 
+void		mms_close(int fd);
+
+/// @brief This open a file, like the open function.
+/// @param path 
+/// @param mode 
+/// @param permission 
+int			mms_open(char *path, int mode, int permission);
 
 #endif
