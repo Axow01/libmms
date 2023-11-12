@@ -6,7 +6,7 @@
 /*   By: mmarcott <mmarcott@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 01:51:32 by mmarcott          #+#    #+#             */
-/*   Updated: 2023/08/17 14:40:18 by mmarcott         ###   ########.fr       */
+/*   Updated: 2023/11/12 18:08:51 by mmarcott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ void	mms_kill(char *message, bool quit, int code)
 	t_pointer	*buffer;
 
 	current = get_data_mms();
+	mms_clean_fd();
 	while (current)
 	{
 		if (current->ptr)
