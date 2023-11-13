@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmarcott <mmarcott@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: oboucher <oboucher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 14:59:46 by mmarcott          #+#    #+#             */
-/*   Updated: 2023/11/12 17:13:39 by mmarcott         ###   ########.fr       */
+/*   Updated: 2023/11/12 20:07:43 by oboucher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,18 @@ int	mms_open(char *path, int mode, int permission)
 	t_mms_fd	*fd_mms;
 
 	fd_mms = get_data_mms()->mms_fd;
-	while (fd_mms)
+	while (fd_mms && fd_mms->next)
 		fd_mms = fd_mms->next;
-	fd_mms = mms_alloc(1, sizeof(t_mms_fd));
+	if (!fd_mms)
+	{
+		fd_mms = mms_alloc(1, sizeof(t_mms_fd));
+		get_data_mms()->mms_fd = fd_mms;
+	}
+	else
+	{
+		fd_mms->next = mms_alloc(1, sizeof(t_mms_fd));
+		fd_mms = fd_mms->next;
+	}
 	if (permission > 0)
 		fd_mms->fd = open(path, mode, permission);
 	else
@@ -58,4 +67,17 @@ void	mms_clean_fd(void)
 		mms_fd = mms_fd->next;
 		temp = mms_free(temp);
 	}
+	get_data_mms()->mms_fd = NULL;
 }
+
+// void	mms_printfd()
+// {
+// 	t_mms_fd	*fd_mms;
+
+// 	fd_mms = get_data_mms()->mms_fd;
+// 	while (fd_mms)
+// 	{
+// 		printf("FD:%d NEXTPTR:%p\n", fd_mms->fd, fd_mms->next);
+// 		fd_mms = fd_mms->next;
+// 	}
+// }
