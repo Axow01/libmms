@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libmms.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oboucher <oboucher@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mmarcott <mmarcott@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 01:48:36 by mmarcott          #+#    #+#             */
-/*   Updated: 2023/11/12 20:07:38 by oboucher         ###   ########.fr       */
+/*   Updated: 2024/05/12 23:10:19 by mmarcott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,9 @@ typedef struct s_pointer
 	void				*(*f)(size_t, size_t);
 	void				*last_allocated;
 	t_mms_fd			*mms_fd;
+	void				(*callback)(void*);
+	void				*callback_param;
+	bool				callback_status;
 	bool				initiated;
 }				t_pointer;
 
@@ -90,5 +93,11 @@ void		mms_close(int fd);
 /// @param mode 
 /// @param permission 
 int			mms_open(char *path, int mode, int permission);
+
+/// @brief This function register a callback, that will
+///				be called when mms_kill is called.
+/// @param callback 
+/// @param param 
+void		mms_register_callback(void (*callback)(void*), void *param);
 
 #endif

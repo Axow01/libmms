@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mms.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oboucher <oboucher@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mmarcott <mmarcott@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 01:51:32 by mmarcott          #+#    #+#             */
-/*   Updated: 2023/11/12 20:08:16 by oboucher         ###   ########.fr       */
+/*   Updated: 2024/05/12 23:01:50 by mmarcott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,9 @@ t_pointer	*get_data_mms(void)
 		data->ptr = NULL;
 		data->initiated = false;
 		data->last_allocated = data;
+		data->callback = NULL;
+		data->callback_status = false;
+		data->callback_param = NULL;
 	}
 	return (data);
 }
@@ -37,6 +40,8 @@ void	mms_kill(char *message, bool quit, int code)
 
 	current = get_data_mms();
 	mms_clean_fd();
+	if (current->callback_status)
+		current->callback(current->callback_param);
 	while (current)
 	{
 		if (current->ptr)

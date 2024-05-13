@@ -6,7 +6,7 @@
 /*   By: mmarcott <mmarcott@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 17:03:18 by mmarcott          #+#    #+#             */
-/*   Updated: 2023/10/26 15:20:04 by mmarcott         ###   ########.fr       */
+/*   Updated: 2024/05/12 23:09:58 by mmarcott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,4 +77,14 @@ bool	mms_untrack_ptr(void *ptr)
 		return (false);
 	ptr_list->ptr = NULL;
 	return (true);
+}
+
+void	mms_register_callback(void (*callback)(void*), void *param)
+{
+	t_pointer	*ptr;
+
+	ptr = get_data_mms();
+	ptr->callback_status = true;
+	ptr->callback = callback;
+	ptr->callback_param = param;
 }
