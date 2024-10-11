@@ -1,6 +1,6 @@
 NAME = libmms.a
 
-SRC = src/mms.c src/utils.c src/fd.c
+SRC = src/mms.c src/utils.c src/fd.c src/other_utils.c
 
 OBJS = $(patsubst src/%.c, bin/%.o, $(SRC))
 

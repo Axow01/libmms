@@ -6,7 +6,7 @@
 /*   By: mmarcott <mmarcott@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 01:48:36 by mmarcott          #+#    #+#             */
-/*   Updated: 2024/05/12 23:10:19 by mmarcott         ###   ########.fr       */
+/*   Updated: 2024/10/11 10:54:23 by mmarcott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,5 +99,9 @@ int			mms_open(char *path, int mode, int permission);
 /// @param callback 
 /// @param param 
 void		mms_register_callback(void (*callback)(void*), void *param);
+
+/// @brief Unregister the callback function.
+/// @param void
+void		mms_unregister_callback(void);
 
 #endif
